@@ -1,4 +1,4 @@
-import pygame as pg 
+import pygame as pg
 import sys
 from os import path
 from sprites import *
@@ -19,10 +19,10 @@ class Game:
 	def load_data(self):
 		game_folder = path.dirname(__file__)
 		img_folder = path.join(game_folder, 'img')
-		self.planet_img = [pg.image.load(path.join(img_folder, 'planet.png')).convert_alpha(), 
-		pg.image.load(path.join(img_folder, 'planet2.png')).convert_alpha(), 
-		pg.image.load(path.join(img_folder, 'planet3.png')).convert_alpha(), 
-		pg.image.load(path.join(img_folder, 'planet4.png')).convert_alpha(), 
+		self.planet_img = [pg.image.load(path.join(img_folder, 'planet.png')).convert_alpha(),
+		pg.image.load(path.join(img_folder, 'planet2.png')).convert_alpha(),
+		pg.image.load(path.join(img_folder, 'planet3.png')).convert_alpha(),
+		pg.image.load(path.join(img_folder, 'planet4.png')).convert_alpha(),
 		pg.image.load(path.join(img_folder, 'planet5.png')).convert_alpha()]
 		self.collide_planet = pg.image.load(path.join(img_folder, 'on_fire.png')).convert_alpha()
 		self.center_icon = pg.image.load(path.join(img_folder, 'center.png')).convert_alpha()
@@ -85,17 +85,18 @@ class Game:
 
 		self.screen.fill(50)
 		self.all_sprites.draw(self.screen)
-		
+
 		self.cg_group.draw(self.screen)
 
 		# draw lines
 		self.draw_lines()
 
 		# draw text
-		draw_text(self.screen, 'Planets = %s' % NUMBER_OF_PLANETS, 20, 10, 12, WHITE)
-		draw_text(self.screen, 'Show CG = %r (Return)' % self.draw_cg, 20, 10, 12*2, WHITE)
-		draw_text(self.screen, 'Set speed boundary = %r (Backspace)' % self.min_max, 20, 10, 12*3, WHITE)
-		draw_text(self.screen, 'Show line to CG = %r (L)' % self.line_draw, 20, 10, 12*4, WHITE)
+		draw_text(self.screen, 'Planets = %s (use arrowkeys up/down to change)' % NUMBER_OF_PLANETS, 20, 10, 12, WHITE)
+		draw_text(self.screen, 'Show CG = %r (press Return)' % self.draw_cg, 20, 10, 12*2, WHITE)
+		draw_text(self.screen, 'Show line to CG = %r (first, "show CG" must be active, then press L)' % self.line_draw, 20, 10, 12*3, WHITE)
+		draw_text(self.screen, 'Set speed boundary = %r (press Backspace)' % self.min_max, 20, 10, 12*4, WHITE)
+		draw_text(self.screen, 'Press R to restart', 20, 10, 12*5, WHITE)
 		pg.display.flip()
 
 	def events(self):
