@@ -1,4 +1,4 @@
-import pygame as pg 
+import pygame as pg
 vec = pg.math.Vector2
 
 # div settings

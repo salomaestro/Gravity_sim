@@ -15,6 +15,7 @@ class Game:
 		self.draw_cg = False
 		self.min_max = True
 		self.line_draw = False
+		self.show_trace = False
 
 	def load_data(self):
 		game_folder = path.dirname(__file__)
@@ -30,6 +31,9 @@ class Game:
 	def new(self):
 		self.start_time = pg.time.get_ticks()
 		self.all_sprites = pg.sprite.Group()
+		if self.show_trace:
+			self.screen.fill((0, 0, 25, 50))
+			self.text()
 
 		self.planets = [Planet(self) for i in range(NUMBER_OF_PLANETS)]
 
@@ -83,7 +87,13 @@ class Game:
 		# show FPS
 		pg.display.set_caption('{:.2f}'.format(self.clock.get_fps()))
 
-		self.screen.fill(50)
+		if self.show_trace:
+			self.background = self.screen.copy()
+			self.background.blit(self.screen, (0, 0, 25, 25))
+		else:
+			self.screen.fill((0, 0, 25, 50))
+			self.text()
+
 		self.all_sprites.draw(self.screen)
 
 		self.cg_group.draw(self.screen)
@@ -91,13 +101,17 @@ class Game:
 		# draw lines
 		self.draw_lines()
 
+		pg.display.flip()
+
+	def text(self):
 		# draw text
 		draw_text(self.screen, 'Planets = %s (use arrowkeys up/down to change)' % NUMBER_OF_PLANETS, 20, 10, 12, WHITE)
 		draw_text(self.screen, 'Show CG = %r (press Return)' % self.draw_cg, 20, 10, 12*2, WHITE)
 		draw_text(self.screen, 'Show line to CG = %r (first, "show CG" must be active, then press L)' % self.line_draw, 20, 10, 12*3, WHITE)
 		draw_text(self.screen, 'Set speed boundary = %r (press Backspace)' % self.min_max, 20, 10, 12*4, WHITE)
-		draw_text(self.screen, 'Press R to restart', 20, 10, 12*5, WHITE)
-		pg.display.flip()
+		draw_text(self.screen, 'Show trace of planets = %r' % self.show_trace, 20, 10, 12*5, WHITE)
+		draw_text(self.screen, 'Press R to restart', 20, 10, 12*6, WHITE)
+
 
 	def events(self):
 		for event in pg.event.get():
@@ -153,6 +167,11 @@ class Game:
 				self.line_draw = False
 			else:
 				self.line_draw = True
+		if keys[pg.K_SPACE]:
+			if self.show_trace:
+				self.show_trace = False
+			else:
+				self.show_trace = True
 
 g = Game()
 while True:
