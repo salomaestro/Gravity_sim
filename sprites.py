@@ -14,7 +14,7 @@ class Planet(pg.sprite.Sprite):
 		self.pos = vec(randint(100, WIDTH - 100), randint(100, HEIGHT - 100))
 		self.vel = vec(randint(-30, 30), randint(-30, 30))
 		self.acc = vec(0, 0)
-		self.mass = randint(35, 60)
+		self.mass = randint(50, 100) #35-60
 		self.size = self.mass ** (1/2)
 		self.force = 0
 		self.rot = 0

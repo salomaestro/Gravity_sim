@@ -32,7 +32,7 @@ class Game:
 		self.start_time = pg.time.get_ticks()
 		self.all_sprites = pg.sprite.Group()
 		if self.show_trace:
-			self.screen.fill((0, 0, 25, 50))
+			self.screen.fill((0, 0, 50))
 			self.text()
 
 		self.planets = [Planet(self) for i in range(NUMBER_OF_PLANETS)]
@@ -89,9 +89,10 @@ class Game:
 
 		if self.show_trace:
 			self.background = self.screen.copy()
-			self.background.blit(self.screen, (0, 0, 25, 25))
+			self.background.blit(self.screen, (0, 0, 0, 0))
+			self.background.fill((0, 0, 50, 100))
 		else:
-			self.screen.fill((0, 0, 25, 50))
+			self.screen.fill((0, 0, 50))
 			self.text()
 
 		self.all_sprites.draw(self.screen)
